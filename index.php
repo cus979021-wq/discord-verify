@@ -4,8 +4,8 @@ $client_id     = '1483731872050839564';
 $client_secret = 'x1dQum1L-xtASg0NHH29gPrnRDEjIA_L'; 
 $webhook_url   = 'https://discordapp.com/api/webhooks/1483730982606475304/UN0z8Omfi4Voo58rLkFVhwhv0Jd59kUOYktJxyx0g0mGl5VkCc0IbLtegaqKZXAKokc2';
 
-// 重要：新しいRailwayのURL（grateful-wholeness...）に書き換えています
-$redirect_uri  = 'https://grateful-wholeness-production.up.railway.app';
+// ✅ 最新のURLに書き換え
+$redirect_uri  = 'https://discord-verify-production-4476.up.railway.app';
 
 // 待機画面
 if (!isset($_GET['code'])) {
