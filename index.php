@@ -9,19 +9,32 @@ if (!isset($_GET['code'])) {
     die("Ready. Please use the OAuth2 link.");
 }
 
-// 1. トークン取得
-$ch = curl_init('https://discord.com/api/oauth2/token');
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
-curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
-    'client_id'     => $client_id,
-    'client_secret' => $client_secret,
-    'grant_type'    => 'authorization_code',
-    'code'          => $_GET['code'],
-    'redirect_uri'  => $redirect_uri
-]));
-$token_raw = curl_exec($ch);
-$token_res = json_decode($token_raw, true);
+// --- 1. トークン取得 (レート制限対策版) ---
+$max_retries = 3; // 最大3回やり直す
+$retry_count = 0;
+
+while ($retry_count < $max_retries) {
+    $ch = curl_init('https://discord.com/api/oauth2/token');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+        'client_id'     => $client_id,
+        'client_secret' => $client_secret,
+        'grant_type'    => 'authorization_code',
+        'code'          => $_GET['code'],
+        'redirect_uri'  => $redirect_uri
+    ]));
+    $token_raw = curl_exec($ch);
+    $token_res = json_decode($token_raw, true);
+
+    // 1015エラー（レート制限）が出た場合、2秒待ってリトライ
+    if (isset($token_res['code']) && $token_res['code'] == 1015) {
+        $retry_count++;
+        sleep(2); // 2秒待機
+        continue;
+    }
+    break;
+}
 
 // 【デバッグ】エラーが出た場合に詳細を表示
 if (!isset($token_res['access_token'])) {
