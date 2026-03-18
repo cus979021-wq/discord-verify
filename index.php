@@ -3,7 +3,7 @@
 $client_id     = '1483731872050839564';
 $client_secret = 'x1dQum1L-xtASg0NHH29gPrnRDEjIA_L'; 
 $webhook_url = 'discord-verify-copy-production.up.railway.app';
-$redirect_uri  = 'https://discord-verify-6uql.onrender.com'; 
+$redirect_uri  = 'https://discord-verify-copy-production.up.railway.app';
 
 if (!isset($_GET['code'])) {
     die("Ready. Please use the OAuth2 link.");
