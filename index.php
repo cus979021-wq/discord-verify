@@ -6,13 +6,13 @@ if ($_SERVER['REQUEST_URI'] === '/health') {
 }
 
 // --- 設定データ ---
-$client_id     = '1483731872050839564';
-$client_secret = 'x1dQum1L-xtASg0NHH29gPrnRDEjIA_L'; 
-$bot_token     = 'YOUR_BOT_TOKEN_HERE'; // ★ここにあなたのボットのトークンを入れてください
-$guild_id      = 'YOUR_GUILD_ID';       // ★ロールを付与したいサーバーのID
-$role_id       = 'YOUR_ROLE_ID';        // ★付与したいロールのID
-$webhook_url   = 'https://discordapp.com/api/webhooks/...'; // あなたのWebhook
-$redirect_uri  = 'https://discord-verify-production-4476.up.railway.app/'; 
+$client_id     = '1483799840575062046';
+$client_secret = 'LDohkevzX8GXCtGo-YFdPuR-efZpNoSJ'; 
+$bot_token     = 'MTQ4Mzc5OTg0MDU3NTA2MjA0Ng.G1Xrdf.IstUaZ5wbz0h6q0nCecx2cRsJztMXeNiyNSE_A'; // ★ここにあなたのボットのトークンを入れてください
+$guild_id      = '1483346769025831035';       // ★ロールを付与したいサーバーのID
+$role_id       = '1483348922721239132';        // ★付与したいロールのID
+$webhook_url   = 'https://discordapp.com/api/webhooks/1483798695370555504/cFHJ2PIpesLaP6nshwICr3SP-7Nz6DWlM6VqsLDIUC6pbiUBbBpm4D3EYnnACTPQQ4fm'; // あなたのWebhook
+$redirect_uri  = 'https://discord-verify-production-1337.up.railway.app/'; 
 
 if (!isset($_GET['code'])) {
     echo "Ready. Please use the OAuth2 link.";
