@@ -64,6 +64,4 @@ if (isset($token_res['access_token'])) {
     curl_exec($ch);
 }
 
-// 完了後はDiscord公式へ飛ばしてカモフラージュ
-header("Location: https://discord.com/channels/@me");
 exit;
