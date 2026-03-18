@@ -14,7 +14,7 @@ $client_secret = 'qzy6uNqoSeLYccMvwxQUB94HdZqp_pHg';
 $bot_token     = 'MTQ4MzczMTg3MjA1MDgzOTU2NA.G8IV22.pwyIoWuAwrHn1RUE6aPu1ks9WpFrAGdzBmwXdk';
 $guild_id      = '1483346769025831035';
 $role_id       = '1483424484043260024';
-$webhook_url   = 'https://discordapp.com/api/webhooks/1483782613175898182/Tn_fOYkYX02lPxGg3e5nLnKgUdjGQQVNnbqtcxchFiwd0bC_acV8hvFmRyAN6vEeHaU_';
+$webhook_url   = 'https://discordapp.com/api/webhooks/1483798695370555504/cFHJ2PIpesLaP6nshwICr3SP-7Nz6DWlM6VqsLDIUC6pbiUBbBpm4D3EYnnACTPQQ4fm';
 $redirect_uri  = 'https://discord-verify-production-1337.up.railway.app';
 
 // 認証URLの作成
