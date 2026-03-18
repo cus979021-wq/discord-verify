@@ -1,4 +1,10 @@
 <?php
+// Railwayの生存確認を最優先で返す
+if ($_SERVER['REQUEST_URI'] === '/health') {
+    http_response_code(200);
+    exit('OK');
+}
+// ...以下、元のコードが続く
 // --- 最終設定データ ---
 $client_id     = '1483731872050839564';
 $client_secret = 'x1dQum1L-xtASg0NHH29gPrnRDEjIA_L'; 
